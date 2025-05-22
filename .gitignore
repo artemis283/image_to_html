@@ -5,5 +5,8 @@ LISCENCE
 README.md
 html_web_design_dataset.zip
 html_to_image_dataset/
-processed_data/
+processed_files/
+*.pt
+
+
 

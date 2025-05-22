@@ -69,9 +69,9 @@ def split_dataset(source_dir, train_dir, test_dir, test_ratio=0.2, seed=42):
 
 if __name__ == "__main__":
     # Define paths
-    source_dir = "kaggle_dataset/kaggle_dataset"
-    train_dir = "kaggle_dataset/train"
-    test_dir = "kaggle_dataset/test"
+    source_dir = "processed_files"
+    train_dir = "processed_files/train"
+    test_dir = "processed_files/test"
     
     # Split the dataset
     split_dataset(source_dir, train_dir, test_dir) 

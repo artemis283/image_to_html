@@ -114,8 +114,8 @@ if __name__ == "__main__":
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Paths
-    train_dataset_path = "/root/image_to_html/kaggle_dataset/train"
-    test_dataset_path = "/root/image_to_html/kaggle_dataset/test"
+    train_dataset_path = "/root/image_to_html/processed_files/train"
+    test_dataset_path = "/root/image_to_html/processed_files/test"
 
     clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32").to(device)
     clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
@@ -135,7 +135,7 @@ if __name__ == "__main__":
 
     loss_fct = nn.CrossEntropyLoss(ignore_index=-100)
 
-    for epoch in range(1): 
+    for epoch in range(100): 
         for image_embeds, html_token_ids, attention_mask in tqdm(train_loader):
             image_embeds = image_embeds.to(device)
             html_token_ids = html_token_ids.to(device)
@@ -158,6 +158,9 @@ if __name__ == "__main__":
             optimizer.step()
 
             print(f"Epoch {epoch} Loss: {loss.item():.4f}")
+
+        torch.save(prefix_tuning_model.state_dict(), f"prefix_tuning_model_{epoch}.pt")
+
 
     print("Training complete.")
 
